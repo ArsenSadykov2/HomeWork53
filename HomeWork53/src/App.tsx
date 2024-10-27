@@ -12,11 +12,22 @@ const App = () => {
         {id: '3', title: 'Dont forget to walk outside'},
         {id: '4', title: 'Barcelona is the best club of the world!!!'},
     ]);
-    const onChangeInput = (event: React.ChangeEventHandler<HTMLInputElement>) => {
+    const onChangeInput: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         setInputTask(event.target.value);
     };
 const addTaskArray = () => {
+    if(inputTask.trim().length > 0) {
+        setTasks([...tasks, {
+            id: String(new Date()),
+            title: inputTask,
+        }]);
+    } else {
+        alert('Вы ничего не Ввели...');
+    }
+};
 
+const deleteTask = (id: number) => {
+    setTasks(tasks.filter(task => task.id !== id));
 };
 
   return (
@@ -40,7 +51,7 @@ const addTaskArray = () => {
               <hr/>
               <div>
                   {tasks.map(task => (
-                      <Task title={task.title} key={task.id} />
+                      <Task title={task.title} key={task.id} deleteTask={() => deleteTask(task.id)}/>
                   ))}
               </div>
           </div>
