@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {useState} from "react";
+import * as React from "react";
+import {ITask} from "./type";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+    const [inputTask , setInputTask] = useState<string>('');
+    const [tasks, setTasks] = useState<ITask[]>([
+        {id: '1', title: 'Lets Workout'},
+        {id: '2', title: 'Do Homeworks'},
+        {id: '3', title: 'Dont forget to walk outside'},
+        {id: '4', title: 'Barcelona is the best club of the world!!!'},
+    ]);
+    const onChangeInput = (event: React.ChangeEventHandler<HTMLInputElement>) => {
+        setInputTask(event.target.value);
+    };
+const addTaskArray = () => {
+
+};
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <>
+          <div className="container mx-auto flex">
+              <div className="flex justify-between items-center w-2/4 my-2">
+                  <div>
+                      <div
+                          className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                          <input value={inputTask} onChange={onChangeInput} type="text" name="username" id="username" autoComplete="username"
+                                 className="block flex-1 border-neutral-600 rounded-md bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                 placeholder="Text new task"/>
+                      </div>
+                  </div>
+                  <button
+                        onClick={addTaskArray}
+                        type="submit"
+                        className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save
+                  </button>
+              </div>
+          </div>
+      </>
   )
-}
+};
 
 export default App
